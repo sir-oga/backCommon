@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+
+  cms_backend_common:
+    build: .
+    container_name: cms_backend_common
+    tty: true
+    volumes:
+      - ./:/var/www/html:delegated
+      - ~/.ssh:/root/.ssh:ro
+      - ~/.gitconfig:/etc/gitconfig

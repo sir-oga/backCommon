@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "PHPCSFixer ..."
+
+/usr/local/bin/php vendor/bin/php-cs-fixer fix src --allow-risky=yes  --verbose --dry-run

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo "PHPStan ..."
+
+/usr/local/bin/php vendor/bin/phpstan analyse src tests --level max

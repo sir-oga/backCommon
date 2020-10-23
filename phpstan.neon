@@ -1,0 +1,4 @@
+parameters:
+    excludes_analyse:
+    	- tests/bootstrap.php
+    	- src/Symfony/Bridge/Doctrine/Form/Type/EntityTypeExtension.php

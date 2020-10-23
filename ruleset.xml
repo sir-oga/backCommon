@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<ruleset name="CMS Backend Common">
+    <description>CMS Backend Common coding standard.</description>
+
+    <!-- Symfony follows the standards defined in the PSR-0, PSR-1 and PSR-2 documents. -->
+
+    <rule ref="PSR2.Files.EndFileNewline"/>
+    <rule ref="PSR12"/>
+    <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
+    <rule ref="Generic.PHP.RequireStrictTypes"/>
+</ruleset>

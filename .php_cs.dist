@@ -1,0 +1,44 @@
+<?php
+
+$finder = PhpCsFixer\Finder::create()
+    ->in(__DIR__)
+    ->exclude('var')
+;
+
+return PhpCsFixer\Config::create()
+    ->setRules([
+        '@PSR2' => true,
+        'array_syntax' => ['syntax' => 'short'],
+        'blank_line_before_statement' => ['statements' => ['declare']],
+        'concat_space' => ['spacing' => 'one'],
+        'constant_case' => ['case' => 'lower'],
+        'declare_strict_types' => true,
+        'linebreak_after_opening_tag' => true,
+        'logical_operators' => true,
+        'lowercase_cast' => true,
+        'lowercase_keywords' => true,
+        'lowercase_static_reference' => true,
+        'native_function_casing' => true,
+        'new_with_braces' => true,
+        'no_empty_comment' => true,
+        'no_empty_phpdoc' => true,
+        'no_empty_statement' => true,
+        'no_extra_blank_lines' => true,
+        'no_leading_import_slash' => true,
+        'no_short_bool_cast' => true,
+        'no_singleline_whitespace_before_semicolons' => true,
+        'no_unused_imports' => true,
+        'no_whitespace_before_comma_in_array' => true,
+        'phpdoc_scalar' => ['types' => ['boolean', 'double', 'integer', 'real', 'str']],
+        'protected_to_private' => true,
+        'return_type_declaration' => ['space_before' => 'none'],
+        'single_blank_line_before_namespace' => true,
+        'single_quote' => ['strings_containing_single_quote_chars' => true],
+        'static_lambda' => true,
+        'trailing_comma_in_multiline_array' => true,
+        'void_return' => true,
+        'whitespace_after_comma_in_array' => true,
+        'yoda_style' => null,
+    ])
+    ->setFinder($finder)
+;

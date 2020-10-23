@@ -1,0 +1,36 @@
+parameters:
+    git_dir: .
+    bin_dir: vendor/bin
+    stop_on_failure: true
+    process_timeout: 90
+    tasks:
+        git_blacklist:
+            keywords:
+                - "die("
+                - "var_dump("
+                - "exit;"
+            whitelist_patterns: ['/^src\/(.*)/']
+            triggered_by: ['php']
+            regexp_type: G
+            metadata:
+                priority: 100
+        phpcs:
+            standard: 'ruleset.xml'
+            whitelist_patterns:
+                - /^src\/(.*)/
+            metadata:
+                priority: 90
+        shell:
+            scripts:
+                - './bin/phpcsfixer'
+                - './bin/phpstan'
+            triggered_by: [php]
+            metadata:
+                priority: 80
+        phpunit:
+            config_file: ~
+            testsuite: ~
+            group: []
+            always_execute: false
+            metadata:
+                priority: 60

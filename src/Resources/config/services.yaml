@@ -1,0 +1,14 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        bind:
+            $projectDir: '%kernel.project_dir%'
+
+    Cms\Backend\Common\:
+        resource: '../../*'
+        exclude:
+          - '../../Utils/Uuid.php'
+
+    Cms\Backend\Common\Doctrine\DBAL\Logging\QueryCountLogger:
+        public: true

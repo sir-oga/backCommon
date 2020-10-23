@@ -1,0 +1,64 @@
+stages:
+  - build
+  - phpcsfix
+  - phpstan
+
+build:
+  stage: build
+  image: docker:19.03.8
+  services:
+    - docker:18.09-dind
+  script:
+    - echo 'Start master build'
+    - apk add curl
+    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+    - docker build --pull -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME .
+    - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+  environment:
+    name: stage
+  tags:
+    - MainRunner
+  allow_failure: false
+  only:
+    - master
+  except:
+    - triggers
+
+phpcsfix:
+  stage: phpcsfix
+  image: docker:19.03.8
+  services:
+    - docker:18.09-dind
+  script:
+    - echo 'Pull docker image'
+    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+    - docker run --rm --name phpcsfix_$CI_COMMIT_REF_NAME --entrypoint bin/phpcsfixer $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+  environment:
+    name: stage
+  tags:
+    - MainRunner
+  allow_failure: false
+  only:
+    - master
+  except:
+    - triggers
+
+phpstan:
+  stage: phpstan
+  image: docker:19.03.8
+  services:
+    - docker:18.09-dind
+  script:
+    - echo 'Pull docker image'
+    - docker pull $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+    - docker run --rm --name phpstan_$CI_COMMIT_REF_NAME --entrypoint bin/phpstan $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_NAME
+  environment:
+    name: stage
+  tags:
+    - MainRunner
+  allow_failure: false
+  only:
+    - master
+  except:
+    - triggers
+
